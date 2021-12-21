@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_201326) do
+ActiveRecord::Schema.define(version: 2021_12_21_123138) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "sku"
@@ -69,4 +69,8 @@ ActiveRecord::Schema.define(version: 2021_06_23_201326) do
 
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "purchase_orders"
+
+  create_view "search_results", sql_definition: <<-SQL
+      select `items`.`id` AS `items_id`,`items`.`title` AS `items_title` from `items`
+  SQL
 end
